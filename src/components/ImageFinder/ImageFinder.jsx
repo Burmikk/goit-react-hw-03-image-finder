@@ -24,6 +24,7 @@ class ImageFinder extends Component {
       this.setState({ isLoading: true });
       const { search, page } = this.state;
       const { data } = await getImages(search, page);
+
       this.setState(prevState => ({
         images: [...prevState.images, ...data.hits],
         totalHits: data.totalHits,
@@ -35,11 +36,7 @@ class ImageFinder extends Component {
     }
   }
 
-  componentDidMount() {
-    // this.fetch();
-  }
   componentDidUpdate(prevProps, prevState) {
-    // console.log('Update');
     if (
       this.state.search !== prevState.search ||
       this.state.page !== prevState.page
@@ -53,7 +50,6 @@ class ImageFinder extends Component {
       return alert('Введите запрос');
     }
     this.setState({ search: value, images: [], page: 1 });
-    // this.fetch();
   };
 
   loadMorePhoto = () => {
@@ -68,8 +64,16 @@ class ImageFinder extends Component {
   };
 
   render() {
-    const { images, isLoading, showModal, bigImg, page, totalHits, error } =
-      this.state;
+    const {
+      images,
+      isLoading,
+      showModal,
+      bigImg,
+      page,
+      totalHits,
+      error,
+      search,
+    } = this.state;
     const shown = page * 12;
 
     return (
@@ -84,6 +88,9 @@ class ImageFinder extends Component {
 
         <ImageGallery images={images} onShowModal={this.onShowModal} />
         {isLoading && <Loader />}
+        {search !== '' && images.length === 0 && !isLoading && (
+          <h2 className={scss.not_found}>Images not found 😞</h2>
+        )}
         {images.length > 0 && shown < totalHits && (
           <Button loadMore={this.loadMorePhoto} />
         )}

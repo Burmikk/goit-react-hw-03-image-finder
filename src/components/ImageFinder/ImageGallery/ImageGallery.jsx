@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './imageGallery.module.scss';
 
 const ImageGallery = ({ images, onShowModal }) => {
-  //   console.log(images);
   const imagesLit = images.map(image => (
     <ImageGalleryItem key={image.id} {...image} onShowModal={onShowModal} />
   ));
