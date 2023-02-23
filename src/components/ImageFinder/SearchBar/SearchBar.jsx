@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { BsSearch } from 'react-icons/bs';
 import scss from './searchBar.module.scss';
+
 class SearchBar extends Component {
   state = {
     imageName: '',
@@ -8,7 +10,7 @@ class SearchBar extends Component {
 
   handleInputChange = e => {
     const { value } = e.target;
-    this.setState({ imageName: value.toLowerCase().trim() });
+    this.setState({ imageName: value.toLowerCase() });
   };
 
   handleSubmit = e => {
@@ -27,7 +29,7 @@ class SearchBar extends Component {
       <header className={scss.header}>
         <form className={scss.form} onSubmit={this.handleSubmit}>
           <input
-            className="input"
+            className={scss.input}
             type="text"
             // autocomplete="off"
             // autofocus
@@ -35,8 +37,8 @@ class SearchBar extends Component {
             value={this.state.imageName}
             onChange={this.handleInputChange}
           />
-          <button type="submit" className="button">
-            <span className="button-label">Search</span>
+          <button className={scss.btn} type="submit">
+            <BsSearch />
           </button>
         </form>
       </header>
