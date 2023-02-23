@@ -76,7 +76,7 @@ class ImageFinder extends Component {
       <div className={scss.container}>
         {showModal && (
           <Modal close={this.onClose}>
-            <img src={bigImg} alt="" />
+            <img src={bigImg} alt="" width="800" />
           </Modal>
         )}
         <SearchBar onSubmit={this.handelSubmitForm} />
