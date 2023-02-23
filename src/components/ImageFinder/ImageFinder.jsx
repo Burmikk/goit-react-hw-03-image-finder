@@ -29,7 +29,7 @@ class ImageFinder extends Component {
         totalHits: data.totalHits,
       }));
     } catch (error) {
-      this.setState({ error: error.message || 'Some(thing wrong! Try later!' });
+      this.setState({ error: error.message || 'Something wrong! Try later!' });
     } finally {
       this.setState({ isLoading: false });
     }
@@ -68,10 +68,10 @@ class ImageFinder extends Component {
   };
 
   render() {
-    const { images, isLoading, showModal, bigImg, page, totalHits } =
+    const { images, isLoading, showModal, bigImg, page, totalHits, error } =
       this.state;
-    console.log(images);
     const shown = page * 12;
+
     return (
       <div className={scss.container}>
         {showModal && (
@@ -80,6 +80,8 @@ class ImageFinder extends Component {
           </Modal>
         )}
         <SearchBar onSubmit={this.handelSubmitForm} />
+        <div>{error}</div>
+
         <ImageGallery images={images} onShowModal={this.onShowModal} />
         {isLoading && <Loader />}
         {images.length > 0 && shown < totalHits && (
